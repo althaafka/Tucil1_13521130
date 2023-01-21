@@ -15,25 +15,23 @@ void displayHomePage(){
             "\nSelamat datang di Make It 24!\n\n";
 }
 
-void inputMenu(int *start, vector<string> *const &result){
-    vector<int> card;
+void inputMenu(bool *const &start, vector<string> *const &result){
     cout << "\nPilih metode input:\n" <<
             "   1. Input manual\n" <<
             "   2. Input random\n" <<
-            "   3. Keluar\n";
-    int opt=0;
-    cout << ">> ";
-    cin >> opt;
-    while (opt<1 || opt>3){
-        cout << "\nInput salah, masukkan 1/2/3\n";
-        cin >> opt;
-    }
+            "   3. Keluar\n" <<
+            ">> ";
     string str;
+    getline(cin,str);
+    while (!isInputValid(3,str)){
+        cout << "\nInput salah, masukkan angksa 1/2/3\n";
+        inputMenu(start,result);
+    }
+    int opt = stoi(str);
     switch (opt){
     case 1:
         cout << "\nMasukkan 4 kartu (2-10, A, J, Q, K)\n" <<
                 ">> ";
-        getline(cin,str);
         *result = makeIt24(userInput());
         displayResult(*result);
         break;
@@ -42,14 +40,31 @@ void inputMenu(int *start, vector<string> *const &result){
         displayResult(*result);
         break;
     case 3:
-        start=0;
+        cout << "\n\nProgram selesai";
+        *start = false;
     default:
         break;
     }
 }
 
+void outputMenu(){
+    cout << "\nIngin menyimpan hasil?\n" <<
+            "   1. Ya\n" <<
+            "   2. Tidak\n" <<
+            ">> ";
+    string str;
+    getline(cin,str);
+    while (!isInputValid(2,str)){
+        cout << "\nInput salah, masukkan angka 1/2\n";
+        outputMenu();
+    }
+    int opt = stoi(str);
+    
+
+}
 int main(){
-    int start =1;
+    bool start = true;
+    srand(time(0));
     vector<string> result;
     displayHomePage();
     while (start){

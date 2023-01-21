@@ -4,9 +4,11 @@
 #include <sstream>
 #include <ctime>
 #include <cstdlib>
+#include <fstream>
+
 using namespace std;
 
-int isValid(vector<string> card){
+int isCardValid(vector<string> card){
     if (card.size()!=4){
         return 0;
     } else {
@@ -40,6 +42,15 @@ vector<int> strCardToNum(vector<string> strCard){
     return card;
 }
 
+bool isInputValid(int nOption, string input){
+    for (int i=1; i<=nOption; i++){
+        if (to_string(i) == input){
+            return true;
+        }
+    }
+    return false;
+}
+
 vector<int> userInput(){
     string str;
     vector<string> strCard;
@@ -49,7 +60,7 @@ vector<int> userInput(){
     while(iss >> x){
         strCard.push_back(x);
     }
-    while(!isValid(strCard)){
+    while(!isCardValid(strCard)){
         strCard.clear();
         cout << "\nMaaf Kartu tidak valid\n>> ";
         getline(cin,str);
@@ -65,9 +76,8 @@ vector<int> userInput(){
 vector<int> randomInput(){
     int i,num;
     vector<int> card;
-    srand(time(0));
     for(int i=0; i<4; i++){
-        card.push_back((rand())%14+1);
+        card.push_back((rand())%13+1);
     }
     cout << "\nKartu Anda adalah ";
     string strCard[13] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
@@ -77,11 +87,8 @@ vector<int> randomInput(){
     cout << endl << endl;
     return card;
 }
-    
 
-// int main(){
-//     vector<int> card;
-//     for (int i=0; i<10; i++){
-//         card = randomInput();
-//     }
+// void saveResult(vector<string> result){
+//     fstream file;
+//     file.open("")
 // }
