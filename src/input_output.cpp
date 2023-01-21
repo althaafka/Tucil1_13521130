@@ -88,7 +88,20 @@ vector<float> randomInput(){
     return card;
 }
 
-// void saveResult(vector<string> result){
-//     fstream file;
-//     file.open("")
-// }
+void saveResult(string fileName, vector<string> result){
+    fstream file;
+    file.open("../test/"+fileName,ios_base::out);
+    for(int i=0;i<result.size();i++){
+        file<<result[i]<<endl;
+    }
+    file.close();
+}
+
+void outputFile(vector<string> result){
+    string fileName;
+    cout << "Masukkan nama file\n" <<
+            ">> ";
+    getline(cin,fileName);
+    saveResult(fileName, result);
+    cout << "\nHasil berhasil disimpan\n";
+}
