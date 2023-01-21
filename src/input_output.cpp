@@ -29,8 +29,8 @@ int isCardValid(vector<string> card){
     }
 }
 
-vector<int> strCardToNum(vector<string> strCard){
-    vector<int> card;
+vector<float> strCardToNum(vector<string> strCard){
+    vector<float> card;
     string x;
     for (int i=0; i<4; i++){
         if (strCard[i]=="J") card.push_back(11);
@@ -51,7 +51,7 @@ bool isInputValid(int nOption, string input){
     return false;
 }
 
-vector<int> userInput(){
+vector<float> userInput(){
     string str;
     vector<string> strCard;
     string x;
@@ -69,20 +69,20 @@ vector<int> userInput(){
             strCard.push_back(x);
         }
     }
-    vector<int> card = strCardToNum(strCard);
+    vector<float> card = strCardToNum(strCard);
     return card;
 }
 
-vector<int> randomInput(){
+vector<float> randomInput(){
     int i,num;
-    vector<int> card;
+    vector<float> card;
     for(int i=0; i<4; i++){
         card.push_back((rand())%13+1);
     }
     cout << "\nKartu Anda adalah ";
     string strCard[13] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     for(int i=0; i<4; i++){
-        cout << strCard[card[i]-1] << " ";
+        cout << strCard[(int)card[i]-1] << " ";
     }
     cout << endl << endl;
     return card;

@@ -11,8 +11,8 @@ void displayResult(vector<string> vec){
     }
 }
 
-int mathOp(int num1, char op, int num2){
-    int res;
+float mathOp(float num1, char op, float num2){
+    float res;
     switch (op){
         case '+':
             res = num1+num2;
@@ -36,12 +36,12 @@ int mathOp(int num1, char op, int num2){
     return res;
 }
 
-string makeString(int variant, int num1, int num2, int num3, int num4, char op1, char op2, char op3){
+string makeString(int variant, float num1, float num2, float num3, float num4, char op1, char op2, char op3){
     string str,a,b,c,d;
-    a=to_string(num1);
-    b=to_string(num2);
-    c=to_string(num3);
-    d=to_string(num4);
+    a=to_string((int)num1);
+    b=to_string((int)num2);
+    c=to_string((int)num3);
+    d=to_string((int)num4);
     switch (variant){
         case 1:
             str = "(("+a+op1+b+")"+op2+c+")"+op3+d;
@@ -64,8 +64,8 @@ string makeString(int variant, int num1, int num2, int num3, int num4, char op1,
     return str;
 }
 
-int calculate(int variant, int num1, int num2, int num3, int num4, char op1, char op2, char op3){
-    int result;
+float calculate(int variant, float num1, float num2, float num3, float num4, char op1, char op2, char op3){
+    float result;
     string strRes;
     switch (variant){
         case 1:
@@ -98,10 +98,11 @@ bool isMember(vector<string> vec, string str){
     return false;
 }
 
-vector<string> makeIt24(vector<int> card){
+vector<string> makeIt24(vector<float> card){
     char op[4] = {'+','-','*','/'};
     vector<string> result;
     string str;
+    float is24;
     for (int a=0;a<4;a++){
         for (int b=0;b<4;b++){
             if (a!=b){
@@ -113,7 +114,8 @@ vector<string> makeIt24(vector<int> card){
                                     for(int op2=0;op2<4;op2++){
                                         for(int op3=0;op3<4;op3++){
                                             for(int var=1;var<=5;var++){
-                                                if (calculate(var,card[a],card[b],card[c],card[d],op[op1],op[op2],op[op3]) == 24){
+                                                is24 = calculate(var,card[a],card[b],card[c],card[d],op[op1],op[op2],op[op3])-24;
+                                                if (is24>-0.000000000001 && is24<0.000000000001){
                                                     str = makeString(var,card[a],card[b],card[c],card[d],op[op1],op[op2],op[op3]);
                                                     if (!isMember(result,str)){
                                                         result.push_back(str);
