@@ -1,14 +1,21 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <sstream>
-#include <cmath>
+// #include <sstream>
+#include <chrono>
 using namespace std;
 
-void displayResult(vector<string> vec){
-    for(int i=0; i< vec.size(); i++){
-        cout << vec.at(i) << endl;
+void displayResult(vector<string> result){
+    int n = result.size()-1;
+    if (n==0){
+        cout << "\nTidak ditemukan solusi\n";
+    } else{
+        cout << "\nDitemukan " << n << " solusi\n";
+        for(int i=0; i< n; i++){
+            cout << "   "<< result[i] << endl;
+        }
     }
+    cout << "Execution time: " << result[n] << " microseconds\n";
 }
 
 float mathOp(float num1, char op, float num2){
@@ -103,6 +110,7 @@ vector<string> makeIt24(vector<float> card){
     vector<string> result;
     string str;
     float is24;
+    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
     for (int a=0;a<4;a++){
         for (int b=0;b<4;b++){
             if (a!=b){
@@ -132,5 +140,7 @@ vector<string> makeIt24(vector<float> card){
             }
         }
     }
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    result.push_back(to_string(chrono::duration_cast<chrono::microseconds>(end - begin).count()));
     return result;
 }

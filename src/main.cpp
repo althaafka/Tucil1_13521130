@@ -65,7 +65,7 @@ void inputMenu(bool *const &start, vector<string> *const &result){
         outputMenu(result);
         break;
     case 3:
-        cout << "\n\nProgram selesai";
+        cout << "\nProgram selesai\n";
         *start = false;
         break;
     default:

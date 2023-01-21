@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <sstream>
-#include <ctime>
-#include <cstdlib>
-#include <fstream>
+#include <sstream> // untuk memisah spasi pada string
+#include <ctime>    
+#include <cstdlib> // untuk randomize
+#include <fstream> // untuk save file
 
 using namespace std;
 
@@ -84,14 +84,14 @@ vector<float> randomInput(){
     for(int i=0; i<4; i++){
         cout << strCard[(int)card[i]-1] << " ";
     }
-    cout << endl << endl;
+    cout << endl;
     return card;
 }
 
 void saveResult(string fileName, vector<string> result){
     fstream file;
     file.open("../test/"+fileName,ios_base::out);
-    for(int i=0;i<result.size();i++){
+    for(int i=0;i<result.size()-1;i++){
         file<<result[i]<<endl;
     }
     file.close();
@@ -99,7 +99,7 @@ void saveResult(string fileName, vector<string> result){
 
 void outputFile(vector<string> result){
     string fileName;
-    cout << "Masukkan nama file\n" <<
+    cout << "\nMasukkan nama file\n" <<
             ">> ";
     getline(cin,fileName);
     saveResult(fileName, result);
