@@ -4,13 +4,11 @@
 #include <ctime>    
 #include <cstdlib> // untuk randomize
 #include <fstream> // untuk save file
-
 using namespace std;
 
 bool isCardValid(vector<string> card){
-    // Mengembailkan true apabila kartu valid
-    // kartu dinyatakan valid apabila terdapat 4 kartu dan 
-    // hanya terdiri dari angka 2-10, A, J, Q, atau K
+    // Mengembailkan true apabila kartu valid kartu dinyatakan valid 
+    // apabila terdapat 4 kartu dan hanya terdiri dari angka 2-10, A, J, Q, atau K
     if (card.size()!=4){
         return false;
     } else {
