@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <string>
 #include <sstream> // untuk memisah spasi pada string
 #include <ctime>    
 #include <cstdlib> // untuk randomize
@@ -8,9 +7,12 @@
 
 using namespace std;
 
-int isCardValid(vector<string> card){
+bool isCardValid(vector<string> card){
+    // Mengembailkan true apabila kartu valid
+    // kartu dinyatakan valid apabila terdapat 4 kartu dan 
+    // hanya terdiri dari angka 2-10, A, J, Q, atau K
     if (card.size()!=4){
-        return 0;
+        return false;
     } else {
         string validInput[13] = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
         int isValid;
@@ -22,14 +24,16 @@ int isCardValid(vector<string> card){
                 }
             }
             if (!isValid){
-                return 0;
+                return false;
             }
         }
-        return 1;
+        return true;
     }
 }
 
 vector<float> strCardToNum(vector<string> strCard){
+    // mengubah kartu berbentuk vektor string menjadi vector float
+    // A menjadi 1, J menjadi 11, Q menjadi 12, K menjadi 13
     vector<float> card;
     string x;
     for (int i=0; i<4; i++){
@@ -43,6 +47,7 @@ vector<float> strCardToNum(vector<string> strCard){
 }
 
 bool isInputValid(int nOption, string input){
+    // mengemballikan true apabila input merupakan angka dengan range 1-nOption
     for (int i=1; i<=nOption; i++){
         if (to_string(i) == input){
             return true;
@@ -52,28 +57,34 @@ bool isInputValid(int nOption, string input){
 }
 
 vector<float> userInput(){
+    // mengembalikan 4 kartu inputan user yang berupa vector of float 
+    // kartu telah valid
     string str;
     vector<string> strCard;
     string x;
     getline(cin,str);
+
     istringstream iss(str);
     while(iss >> x){
         strCard.push_back(x);
     }
+    //pengecekan ke-valid-an kartu
     while(!isCardValid(strCard)){
         strCard.clear();
-        cout << "\nMaaf Kartu tidak valid\n>> ";
+        cout << "\nMaaf Kartu tidak valid\n>> " ;
         getline(cin,str);
         istringstream iss(str);
         while(iss >> x){
             strCard.push_back(x);
         }
     }
+    // mengubah kartu yang berupa string menjadi float
     vector<float> card = strCardToNum(strCard);
     return card;
 }
 
 vector<float> randomInput(){
+    // mengenerate kartu secara random
     int i,num;
     vector<float> card;
     for(int i=0; i<4; i++){
@@ -89,6 +100,7 @@ vector<float> randomInput(){
 }
 
 void saveResult(string fileName, vector<string> result){
+    // menyimpan hasil pada file
     fstream file;
     file.open("../test/"+fileName,ios_base::out);
     for(int i=0;i<result.size()-1;i++){
@@ -98,6 +110,7 @@ void saveResult(string fileName, vector<string> result){
 }
 
 void outputFile(vector<string> result){
+    // menyimpan hasil dengan nama file inputan user
     string fileName;
     cout << "\nMasukkan nama file\n" <<
             ">> ";

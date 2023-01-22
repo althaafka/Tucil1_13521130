@@ -15,16 +15,20 @@ void displayHomePage(){
             "\nSelamat datang di Make It 24!\n\n";
 }
 
-void outputMenu(vector<string> *const &result){
+void outputMenu(bool *const &start, vector<string> *const &result){
     cout << "\nIngin menyimpan hasil?\n" <<
             "   1. Ya\n" <<
             "   2. Tidak\n" <<
             ">> ";
-    string str;
+    string str ;
     getline(cin,str);
     while (!isInputValid(2,str)){
         cout << "\nInput salah, masukkan angka 1/2\n";
-        outputMenu(result);
+            cout << "\nIngin menyimpan hasil?\n" <<
+            "   1. Ya\n" <<
+            "   2. Tidak\n" <<
+            ">> ";
+        getline(cin,str,'\n');
     }
     int opt = stoi(str);
     switch (opt){
@@ -48,7 +52,12 @@ void inputMenu(bool *const &start, vector<string> *const &result){
     getline(cin,str);
     while (!isInputValid(3,str)){
         cout << "\nInput salah, masukkan angksa 1/2/3\n";
-        inputMenu(start,result);
+        cout << "\nPilih metode input:\n" <<
+            "   1. Input manual\n" <<
+            "   2. Input random\n" <<
+            "   3. Keluar\n" <<
+            ">> ";
+        getline(cin,str);
     }
     int opt = stoi(str);
     switch (opt){
@@ -57,12 +66,12 @@ void inputMenu(bool *const &start, vector<string> *const &result){
                 ">> ";
         *result = makeIt24(userInput());
         displayResult(*result);
-        outputMenu(result);
+        outputMenu(start,result);
         break;
     case 2:
         *result = makeIt24(randomInput());
         displayResult(*result);
-        outputMenu(result);
+        outputMenu(start,result);
         break;
     case 3:
         cout << "\nProgram selesai\n";
