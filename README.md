@@ -10,8 +10,15 @@
 note: cara ini dilakukan pada windows
 - Buka CMD
 - Ubah directory pada directory folder bin
-- g++ ../src/main.cpp -o main
-- main
+  ```
+  cd bin
+- Untuk menjalankan program
+  ```
+  g++ ../src/main.cpp -o main
+  ```
+  ```
+  main
+  ```
 
 ## Author
 Althaaf Khasyi Atisomya - 13521130
