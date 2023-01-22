@@ -4,6 +4,7 @@
 using namespace std;
 
 void displayHomePage(){
+    // menampilkan home page
     cout << "                                                    .------.        \n" <<
             " ___  ___      _          _____ _     _____   ___   |A_  _ |        \n" <<
             " |  \\/  |     | |        |_   _| |   / __  \\ /   |  |( \\/ ).-----.  \n" <<
@@ -16,6 +17,7 @@ void displayHomePage(){
 }
 
 void outputMenu(bool *const &start, vector<string> *const &result){
+    // menampilkan menu save hasil
     cout << "\nIngin menyimpan hasil?\n" <<
             "   1. Ya\n" <<
             "   2. Tidak\n" <<
@@ -43,6 +45,7 @@ void outputMenu(bool *const &start, vector<string> *const &result){
 }
 
 void inputMenu(bool *const &start, vector<string> *const &result){
+    // menampilkan menu input
     cout << "\nPilih metode input:\n" <<
             "   1. Input manual\n" <<
             "   2. Input random\n" <<
@@ -61,19 +64,19 @@ void inputMenu(bool *const &start, vector<string> *const &result){
     }
     int opt = stoi(str);
     switch (opt){
-    case 1:
+    case 1: //input user
         cout << "\nMasukkan 4 kartu (2-10, A, J, Q, K)\n" <<
                 ">> ";
         *result = makeIt24(userInput());
         displayResult(*result);
         outputMenu(start,result);
         break;
-    case 2:
+    case 2: //input random
         *result = makeIt24(randomInput());
         displayResult(*result);
         outputMenu(start,result);
         break;
-    case 3:
+    case 3: //keluar dari program
         cout << "\nProgram selesai\n";
         *start = false;
         break;
